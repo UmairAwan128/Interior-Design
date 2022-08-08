@@ -1,0 +1,422 @@
+﻿@using InteriorDesign.Models
+
+@{
+    Layout = null;
+    UserSessionModel currentUser = new UserSessionModel();
+    currentUser.PhoneNo = currentUser.FirstName = null;
+    currentUser = (UserSessionModel)Session[WebUtil.CURRENT_USER];
+
+}
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Go.Interiors - Designs</title>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet" media="screen">
+</head>
+<body>
+    <div class="loader">
+        <div class="page-lines">
+            <div class="container">
+                <div class="col-line col-xs-4">
+                    <div class="line"></div>
+                </div>
+                <div class="col-line col-xs-4">
+                    <div class="line"></div>
+                </div>
+                <div class="col-line col-xs-4">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="loader-brand">
+            <div class="sk-folding-cube">
+                <div class="sk-cube1 sk-cube"></div>
+                <div class="sk-cube2 sk-cube"></div>
+                <div class="sk-cube4 sk-cube"></div>
+                <div class="sk-cube3 sk-cube"></div>
+            </div>
+        </div>
+    </div>
+
+    <header id="top" class="header-home">
+        <div class="brand-panel">
+            <a href="#top" class="brand js-target-scroll">
+                Go<span class="text-primary">.</span>Interiors
+            </a>
+            <div class="brand-name">Go.Interiors</div>
+            <div class="slide-number">
+                <span class="current-number text-primary">0<span class="count">1</span></span>
+                <sup><span class="delimiter">/</span> 0<span class="total-count"></span></sup>
+            </div>
+        </div>
+        <div class="header-phone">+7 (212) 674-25-10</div>
+        <div class="vertical-panel"></div>
+        <div class="vertical-panel-content">
+            <div class="vertical-panel-info">
+                <div class="vertical-panel-title">Architecture buro</div>
+                <div class="line"></div>
+            </div>
+            <ul class="social-list">
+                <li><a href="" class="fa fa-instagram"></a></li>
+                <li><a href="" class="fa fa-twitter"></a></li>
+                <li><a href="" class="fa fa-behance"></a></li>
+                <li><a href="" class="fa fa-facebook"></a></li>
+            </ul>
+        </div>
+
+        <!-- Navigation Desctop -->
+
+        <nav class="navbar-desctop visible-md visible-lg">
+            <div class="container">
+                <a href="#top" class="brand js-target-scroll">
+                    Go<span class="text-primary">.</span>Interiors
+                </a>
+                <ul class="navbar-desctop-menu">
+                    <li class="active">
+                        <a href="@Url.Action("Index","Home")">Home</a>
+
+                    </li>
+                    <li>
+                        <a href="#">About us</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+
+                    </li>
+
+                    @if (currentUser == null)
+                    {
+                        <li>
+                            <a href="@Url.Action("Login", "Home")">Login</a>
+                        </li>
+                    }
+                    else
+                    {
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="" style="width:15px;height:15px" /> @currentUser.FirstName<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="divider"></li>
+                                @if (currentUser.Role == "Admin")
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index", "Admin")">Admin Pannel</a>
+
+                                    </li>
+                                }
+                                <li><a href="@Url.Action("Logout", "Home")"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                            </ul>
+                        </li>
+                        <input type="hidden" id="UserName" value="@currentUser.FirstName" />
+                        <input type="hidden" id="PhoneNo" value="@currentUser.PhoneNo" />
+
+                    }
+
+
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Navigation Mobile -->
+
+        <nav class="navbar-mobile">
+            <a href="#top" class="brand js-target-scroll">
+                go<span class="text-primary">.</span>Interiors
+            </a>
+
+            <!-- Navbar Collapse -->
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-mobile">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar-mobile">
+                <ul class="navbar-nav-mobile">
+                    <li class="active">
+                        <a href="@Url.Action("Index","Home")">Home <i class="fa fa-angle-down"></i></a>
+
+                    </li>
+                    <li>
+                        <a href="#">About us</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+
+                    </li>
+                    
+                    @if (currentUser == null)
+                    {
+                        <li>
+                            <a href="@Url.Action("Login", "Home")">Login</a>
+                        </li>
+                    }
+                    else
+                    {
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="" style="width:15px;height:15px" /> @currentUser.FirstName<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="divider"></li>
+                                @if (currentUser.Role == "Admin")
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index", "Admin")">Admin Pannel</a>
+
+                                    </li>
+                                }
+                                <li><a href="@Url.Action("Logout", "Home")"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                            </ul>
+                        </li>
+              
+                    }
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    @RenderBody()
+
+
+
+    <!--SCRIPTS -->
+
+    <script src="~/js/smoothscroll.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/wow.min.js"></script>
+    <script src="~/js/jquery.stellar.min.js"></script>
+    <script src="~/js/jquery.magnific-popup.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+
+    <!-- SLIDER REVOLUTION -->
+    <script src="~/js/rev-slider/jquery.themepunch.tools.min.js"></script>
+    <script src="~/js/rev-slider/jquery.themepunch.revolution.min.js"></script>
+
+    <!-- SLIDER REVOLUTION 5.0 EXTENSIONS   -->
+    <script src="~/js/rev-slider/revolution.extension.actions.min.js"></script>
+    <script src="~/js/rev-slider/revolution.extension.carousel.min.js"></script>
+    <script src="~/js/rev-slider/revolution.extension.kenburn.min.js"></script>
+    <script src="~/js/rev-slider/revolution.extension.layeranimation.min.js"></script>
+    <script src="~/js/rev-slider/revolution.extension.migration.min.js"></script>
+    <script src="~/js/rev-slider/revolution.extension.navigation.min.js"></script>
+    <script src="~/js/rev-slider/revolution.extension.parallax.min.js"></script>
+    <script src="~/js/rev-slider/revolution.extension.slideanims.min.js"></script>
+    <script src="~/js/rev-slider/revolution.extension.video.min.js"></script>
+    <script src="~/js/interface.js"></script>
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA9HwydtDqcojZKZVJtcQ740MVJiXP5zBc",
+            authDomain: "interiordesign-6d720.firebaseapp.com",
+            databaseURL: "https://interiordesign-6d720.firebaseio.com",
+            projectId: "interiordesign-6d720",
+            storageBucket: "interiordesign-6d720.appspot.com",
+            messagingSenderId: "564002465231"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+    $(document).ready(function () {
+
+        $("#UploadInteriorBtn").hide();
+        $("#waitInteriorBtn").hide();
+
+    });
+
+
+        function getURL(imageName) {
+            
+            var storage = firebase.storage();
+            var storageRef = storage.ref();
+            storageRef.child(imageName).getDownloadURL().then(function (url) {
+                // `url` is the download URL for 'images/stars.jpg'
+
+                // This can be downloaded directly:
+                var xhr = new XMLHttpRequest();
+                xhr.responseType = 'blob';
+                xhr.onload = function (event) {
+                    var blob = xhr.response;
+                };
+                xhr.open('GET', url);
+                xhr.send();
+
+                $("#productImage" + imageName).attr("src", url) //assign the Url to <img> tag above to show
+
+            }).catch(function (error) {
+                // Handle any errors
+            });
+
+        }
+        var totalPosts;
+
+        $(".deletebtn").click(function () {
+            var Key = $(this).attr('data-postKey');
+
+            var fileName = $(this).attr('data-fileName');
+
+            firebase.database().ref('Posts/' + Key).remove();
+
+            
+            // Get a reference to the storage service, which is used to create references in your storage bucket
+            var storage = firebase.storage();
+
+            // Create a storage reference from our storage service
+            var storageRef = storage.ref();
+
+            // Create a reference to the file to delete
+            var imgToDel = storageRef.child('Interiors/' + fileName);
+
+            // Delete the file
+            imgToDel.delete().then(function () {
+                window.location.reload();
+            }).catch(function (error) {
+                // Uh-oh, an error occurred!
+            });
+        });
+        
+
+
+        var dwnldURL; //global as it value is generated asyncronyously
+        var CurrentID;
+        var fileNameWithExt;
+
+
+
+
+        $("#imageUpload").change(function (event) {
+
+
+        var element = this; //as this so element will have the reference of the element(Image) on which this function is applied
+
+        var formData = new FormData(); //created here a new FormData obj as its accessible on server and also when we submitForm
+        var totalFiles = element.files.length;
+
+        var selectedFileEvent;
+
+
+        for (var i = 0; i < totalFiles; i++) {
+            var file = element.files[i]; //first get the file
+            formData.append("Photo", file); //then add to formData
+        }
+
+        $.ajax({
+            type: "Post",
+            url: '@Url.Action("UploadImage", "Shared")',
+            data: formData,
+            dataType: 'json', //tell the type and other things
+            contentType: false,
+            processData: false
+        })
+        .done(function (response) { //UploadImage() Action will return an annonymous obj in the form of Json in that object we are getting two things
+        if (response.Success == true) {
+
+            $("#productImage").attr("src", response.ImageURL) //assign the Url to <img> tag above to show
+            $("#ImageURL").val(response.ImageURL) //also assign the ImageURL/Path to the <input id="ImageURL"> so we can store it in DB
+            $("#waitInteriorBtn").show();
+
+            CurrentID = response.TotalPosts;
+
+            selectedFileEvent = event.target.files[0];
+            //getting fileName from ImageURL
+
+            var indexOfdot = response.ImageURL.indexOf(".", 6);
+            var fileExt = response.ImageURL.substr(indexOfdot);
+
+            fileNameWithExt = CurrentID + fileExt;
+
+            var storageRef = firebase.storage().ref('Interiors/' + fileNameWithExt);
+
+             var UploadTask = storageRef.put(selectedFileEvent)
+
+            UploadTask.on('state_changed',function(snapshot) {
+            },
+            function (err) {
+
+            },
+            function() {
+
+                debugger;
+                UploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                    console.log('File available at', downloadURL);
+                    dwnldURL = downloadURL;
+                    UploadData();
+                });
+
+
+            });
+
+            }
+            })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        alert("Failed");
+        });
+    });
+
+
+   function UploadData() {
+            var postKey = CurrentID;
+            var updatesPost = {};
+
+            var postData = {
+                PostKey: postKey,
+                FileName: fileNameWithExt,
+                ImageUrl: dwnldURL,
+                user: $("#UserName").val(),
+                phoneNo: $("#PhoneNo").val(),
+                caption: $("#imageCaption").val()
+            };
+
+            //now as data is saved now increment the counter if it is done before then
+            //there can be problem like data is not saved anyhow and counter incremented
+            updatesPost['/Posts/' + postKey] = postData;
+            firebase.database().ref().update(updatesPost)
+
+            var newCounter = CurrentID;
+
+            var updatesCounter = {};
+            var CounterData = {
+                TotalPosts: newCounter
+            };
+            
+            $("#waitInteriorBtn").hide();
+            $("#UploadInteriorBtn").show();
+
+            updatesCounter['Counter/node/'] = CounterData;
+
+            firebase.database().ref().update(updatesCounter)
+       
+   }
+
+    </script>
+
+
+</body>
+
+</html>

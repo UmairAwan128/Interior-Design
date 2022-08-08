@@ -1,0 +1,102 @@
+﻿@using InteriorDesign.Models
+@model IEnumerable<ProductModel>
+
+@{
+    ViewBag.Title = "Interiors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Home -->
+
+<main class="main main-inner main-projects bg-projects" data-stellar-background-ratio="0.6">
+    <div class="container">
+        <header class="main-header">
+            <h1>Projects</h1>
+        </header>
+    </div>
+
+    <!-- Lines -->
+
+    <div class="page-lines">
+        <div class="container">
+            <div class="col-line col-xs-4">
+                <div class="line"></div>
+            </div>
+            <div class="col-line col-xs-4">
+                <div class="line"></div>
+            </div>
+            <div class="col-line col-xs-4">
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<header class="section-header" style="margin-top:55px; margin-bottom:55px;">
+    <h2 class="section-title">Uploads <span class="text-primary">& Projects</span></h2>
+</header>
+
+<div class="content">
+    <!-- Projects -->
+    <div class="container" id="ProductTable">
+        
+        <table id="tblcategories" class="table table-bordered">
+            <thead>
+                <tr class="bg-primary">
+                    <th colspan="5" >
+                        <h3 sstyle="text-align: center;">
+                            <span> @ViewBag.Title &nbsp;&nbsp; <span class="hidden-print"></span></span>
+
+                        </h3>
+                    </th>
+                </tr>
+                <tr class="bg-primary">
+                    <th class="col-lg-3 col-md-3 hidden-sm hidden-xs">Image</th>
+                    <th class="col-lg-2 col-md-2 col-sm-2 ">Name</th>
+                    <th class="col-lg-7 col-md-7 col-sm-7 " colspan="2">Uploaded By</th>
+                </tr>
+            </thead>
+            <tbody id="tblbdycountries">
+                @foreach (var product in Model)
+                {
+                    <tr class="dgdatarow" data-productid="@product.phoneNo">
+                        
+                        <th class="col-lg-3 col-md-3 hidden-sm col-xs-1 "><img src="@product.ImageUrl" alt="@product.FileName" style="width:40px; height:40px;" /> </th>
+                        <td class="col-lg-2 col-md-2 col-sm-2 col-xs-5">@product.FileName</td>
+                        <td class="col-lg-4 col-md-4 col-sm-4 col-xs-4">@product.user</td>
+                        <td class="col-lg-3 col-md-3 col-sm-3 col-xs-3">@product.phoneNo</td>
+  
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div>
+
+        </div>
+
+        <!-- Footer -->
+
+        <footer id="footer" class="footer">
+            <div class="container">
+                <div class="row-base row">
+                    <div class="col-base text-left-md col-md-4">
+                        <a href="#" class="brand">
+                            Go<span class="text-primary">.</span>Interiors
+                        </a>
+                    </div>
+                    <div class="text-center-md col-base col-md-4">
+                        <a href="" class="author-link">
+                            by USAWAN
+                        </a>
+                    </div>
+                    <div class="text-right-md col-base col-md-4">
+                        © go.Interiors 2018. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
